@@ -54,28 +54,33 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://im404.github.io/index.html">
+  <meta name="description" content="What is a Module - 什么是模块A module encapsulates related code into a single unit of code. When creating a module, this can be interpreted as moving all related functions into a file. Let’s illustrate thi">
+<meta name="keywords" content="翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Understanding module.exports and exports in Node.js">
+<meta property="og:url" content="http://im404.github.io/2019/08/27/Understanding-module-exports-and-exports-in-Node-js/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="What is a Module - 什么是模块A module encapsulates related code into a single unit of code. When creating a module, this can be interpreted as moving all related functions into a file. Let’s illustrate thi">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-28T02:56:50.804Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-  <link rel="canonical" href="http://im404.github.io/">
+<meta name="twitter:title" content="Understanding module.exports and exports in Node.js">
+<meta name="twitter:description" content="What is a Module - 什么是模块A module encapsulates related code into a single unit of code. When creating a module, this can be interpreted as moving all related functions into a file. Let’s illustrate thi">
+  <link rel="canonical" href="http://im404.github.io/2019/08/27/Understanding-module-exports-and-exports-in-Node-js/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Hexo</title>
+  <title>Understanding module.exports and exports in Node.js | Hexo</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -184,12 +189,13 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://im404.github.io/2019/08/27/Understanding-module-exports-and-exports-in-Node-js/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -202,9 +208,8 @@
       <meta itemprop="name" content="Hexo">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/27/Understanding-module-exports-and-exports-in-Node-js/" class="post-title-link" itemprop="url">Understanding module.exports and exports in Node.js</a>
+        <h1 class="post-title" itemprop="name headline">Understanding module.exports and exports in Node.js
+
           
         </h1>
 
@@ -246,7 +251,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="What-is-a-Module-什么是模块"><a href="#What-is-a-Module-什么是模块" class="headerlink" title="What is a Module - 什么是模块"></a>What is a Module - 什么是模块</h2><p>A module encapsulates related code into a single unit of code. When creating a module, this can be interpreted as moving all related functions into a file. Let’s illustrate this point with an example involving an application built with Node.js. Imagine that we created a file called <strong>greetings.js</strong> and it contains the following two functions:</p>
+        <h2 id="What-is-a-Module-什么是模块"><a href="#What-is-a-Module-什么是模块" class="headerlink" title="What is a Module - 什么是模块"></a>What is a Module - 什么是模块</h2><p>A module encapsulates related code into a single unit of code. When creating a module, this can be interpreted as moving all related functions into a file. Let’s illustrate this point with an example involving an application built with Node.js. Imagine that we created a file called <strong>greetings.js</strong> and it contains the following two functions:</p>
 <blockquote>
 <p>一个模块将相关代码封装进一个单独的代码单元。当创建一个模块的时候，这个可以解释为将所有相关方法移动到一个文件中。让我们通过一个用包含在NODE应用中的例子来阐述这个观点。假设我们创建一个名为<strong>greetings.js</strong>的文件，它包含下面两个方法：</p>
 </blockquote>
@@ -328,27 +333,36 @@
 <p>这时，没有什么与之前不同。</p>
 </blockquote>
 
-        
-      
     </div>
 
     
     
     
-      <footer class="post-footer">
-          <div class="post-eof"></div>
         
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/翻译/" rel="tag"># 翻译</a>
+            
+          </div>
+        
+
+        
+
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
   </div>
-
-  
 
 
           </div>
@@ -367,6 +381,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc" data-target="post-toc-wrap">
@@ -379,6 +398,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-a-Module-什么是模块"><span class="nav-number">1.</span> <span class="nav-text">What is a Module - 什么是模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Importing-a-Module-导入一个模块"><span class="nav-number">2.</span> <span class="nav-text">Importing a Module - 导入一个模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Important-Points-重要的几点"><span class="nav-number">3.</span> <span class="nav-text">Important Points - 重要的几点</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
