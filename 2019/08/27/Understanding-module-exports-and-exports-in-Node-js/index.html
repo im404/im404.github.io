@@ -10,7 +10,8 @@
 
     <!--Description-->
     
-        <meta name="description" content="What is a Module - 什么是模块A module encapsulates related code into a single unit of code. When creating a module, this can be interpreted as moving all r">
+        <meta name="description" content="原文链接：Understanding module.exports and exports in Node.js
+什么是模块一个模块将相关代码封装进一个单独的代码单元。当创建一个模块的时候，这个可以解释为将所有相关方法移动到一个文件中。让我们通过一个用包含在NODE应用中的例子来阐述这个观点。假设我">
     
 
     <!--Author-->
@@ -20,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Understanding module.exports and exports in Node.js - 理解Node中的module.exports和exports">
+        <meta property="og:title" content="理解Node中的module.exports和exports">
     
 
     <!--Open Graph Description-->
@@ -42,7 +43,7 @@
 
     <!-- Title -->
     
-    <title>Understanding module.exports and exports in Node.js - 理解Node中的module.exports和exports - Will</title>
+    <title>理解Node中的module.exports和exports - Will</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -122,7 +123,7 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Understanding module.exports and exports in Node.js - 理解Node中的module.exports和exports</h1>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">理解Node中的module.exports和exports</h1>
             <p class="f4 fw3 pab-100px tc tc-m tl-ns">2019-08-27</p>
         </div>
     </div>
@@ -149,86 +150,65 @@
                     
 
                     <!-- Main Post Content -->
-                    <h2 id="What-is-a-Module-什么是模块"><a href="#What-is-a-Module-什么是模块" class="headerlink" title="What is a Module - 什么是模块"></a>What is a Module - 什么是模块</h2><p>A module encapsulates related code into a single unit of code. When creating a module, this can be interpreted as moving all related functions into a file. Let’s illustrate this point with an example involving an application built with Node.js. Imagine that we created a file called <strong>greetings.js</strong> and it contains the following two functions:</p>
-<blockquote>
-<p>一个模块将相关代码封装进一个单独的代码单元。当创建一个模块的时候，这个可以解释为将所有相关方法移动到一个文件中。让我们通过一个用包含在NODE应用中的例子来阐述这个观点。假设我们创建一个名为<strong>greetings.js</strong>的文件，它包含下面两个方法：</p>
-</blockquote>
+                    <p><strong>原文链接：</strong><a href="https://www.sitepoint.com/understanding-module-exports-exports-node-js/" target="_blank" rel="noopener">Understanding module.exports and exports in Node.js</a></p>
+<h2 id="什么是模块"><a href="#什么是模块" class="headerlink" title="什么是模块"></a>什么是模块</h2><p>一个模块将相关代码封装进一个单独的代码单元。当创建一个模块的时候，这个可以解释为将所有相关方法移动到一个文件中。让我们通过一个用包含在NODE应用中的例子来阐述这个观点。假设我们创建一个名为<strong>greetings.js</strong>的文件，它包含下面两个方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// greetings.js</span></span><br><span class="line">sayHelloInEnglish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">sayHelloInSpanish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hola"</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Exporting-a-Module-导出一个模块"><a href="#Exporting-a-Module-导出一个模块" class="headerlink" title="Exporting a Module - 导出一个模块"></a>Exporting a Module - 导出一个模块</h2><p>The utility of greetings.js increases when its encapsulated code can be utilized in other files. So let’s refactor greetings.js to achieve this goal. To comprehend what is actually happening, we can follow a three-step process:</p>
-<blockquote>
-<p>当greetings.js封装的代码可以在其他文件中使用的时候，它的实用性就会大大提升。所以让我们来重构一下greetings.js来达到这个目的。我们能通过三个步骤来理解它究竟发生了什么：</p>
-</blockquote>
-<p>1) Imagine that this line of code exists as the first line of code in greetings.js:</p>
-<blockquote>
+<h2 id="导出一个模块"><a href="#导出一个模块" class="headerlink" title="导出一个模块"></a>导出一个模块</h2><p>当greetings.js封装的代码可以在其他文件中使用的时候，它的实用性就会大大提升。所以让我们来重构一下greetings.js来达到这个目的。我们能通过三个步骤来理解它究竟发生了什么：</p>
 <p>1）假设下面这行代码作为greeting.js的第一行代码</p>
-</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// greetings.js</span></span><br><span class="line"><span class="keyword">var</span> exports = <span class="built_in">module</span>.exports = &#123;&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>2) Assign any expression in greetings.js that we want to become available in other files to the exports object:</p>
-<blockquote>
-<p>在greetings.js中，把想要给其他文件使用的表达式赋值给导出对象：</p>
-</blockquote>
+<p>2）在greetings.js中，把想要给其他文件使用的表达式赋值给导出对象：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// greetings.js</span></span><br><span class="line"><span class="comment">// var exports = module.exports = &#123;&#125;;</span></span><br><span class="line"></span><br><span class="line">exports.sayHelloInEnglish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"HELLO"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.sayHelloInSpanish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hola"</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>In the code above, we could have replaced exports with module.exports and achieved the same result. If this seems confusing, remember that exports and module.exports reference the same object.</p>
-<blockquote>
 <p>上面的这段代码，我们可以用<strong>module.exports</strong>来替换<strong>exports</strong>来获得同样的结果。如果你对此比较困惑，那么请记住exports和module.exports引用了同样的对象。</p>
-</blockquote>
-<p>3) This is the current value of module.exports:</p>
-<blockquote>
-<p>这是module.exports的当前值</p>
-</blockquote>
+<p>3）这是module.exports的当前值</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">sayHelloInEnglish: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"HELLO"</span>;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">sayHelloInSpanish: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hola"</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Importing-a-Module-导入一个模块"><a href="#Importing-a-Module-导入一个模块" class="headerlink" title="Importing a Module - 导入一个模块"></a>Importing a Module - 导入一个模块</h2><p>Let’s import the publicly available methods of greetings.js to a new file called main.js. This process can be described in three steps:</p>
-<blockquote>
-<p>让我们在新创建的main.js中导入greetings.js中公开可用的方法。这个过程可以用三个步骤来描述：</p>
-</blockquote>
-<p>1) The keyword require is used in Node.js to import modules. Imagine that this is how require is defined:</p>
-<blockquote>
+<h2 id="导入一个模块"><a href="#导入一个模块" class="headerlink" title="导入一个模块"></a>导入一个模块</h2><p>让我们在新创建的main.js中导入greetings.js中公开可用的方法。这个过程可以用三个步骤来描述：</p>
 <p>1）在NodeJs中关键字”require”被用于导入模块。假设这就是require的定义:</p>
-</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">require</span> = <span class="function"><span class="keyword">function</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">module</span>.exports;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>2) Let’s require greetings.js in main.js:</p>
-<blockquote>
-<p>让我们在main.js中require greetings.js：</p>
-</blockquote>
+<p>2）让我们在main.js中require greetings.js：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">var</span> greetings = <span class="built_in">require</span>(<span class="string">"./greetings.js"</span>);</span><br></pre></td></tr></table></figure>
 
-<p>The above code is equivalent to this:</p>
-<blockquote>
 <p>上面代码等效于下面这段代码：</p>
-</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">var</span> greetings = &#123;</span><br><span class="line">sayHelloInEnglish: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"HELLO"</span>;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">sayHelloInSpanish: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hola"</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>3) We can now access the publicly available methods of greetings.js as a property of our greetings variable in main.js.</p>
-<blockquote>
-<p>现在我们可以访问greetings.js公开可用的方法了，就像访问在main.js中greetings变量的一个属性。</p>
-</blockquote>
+<p>3）现在我们可以访问greetings.js公开可用的方法了，就像访问在main.js中greetings变量的一个属性。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">var</span> greetings = <span class="built_in">require</span>(<span class="string">"./greetings.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// "Hello"</span></span><br><span class="line">greetings.sayHelloInEnglish();</span><br><span class="line"></span><br><span class="line"><span class="comment">// "Hola"</span></span><br><span class="line">greetings.sayHelloInSpanish();</span><br></pre></td></tr></table></figure>
 
-<h2 id="Important-Points-重要的几点"><a href="#Important-Points-重要的几点" class="headerlink" title="Important Points - 重要的几点"></a>Important Points - 重要的几点</h2><p>The keyword require returns an object, which references the value of module.exports for a given file.<br>If a developer unintentionally or intentionally re-assigns module.exports to a different object or different data structure, then any properties added to the original module.exports object will be unaccessible.</p>
-<blockquote>
-<p>关键词”require”返回一个对象，该对象指向（引用）了给定文件的module.exports的值。如果开发者有意识或无意识地重新将module.exports赋予了不同的对象或者不同的数据结构，那么任何添加给原始module.exports对象的属性将无法被访问。</p>
-</blockquote>
-<p>An example will help elaborate this point:</p>
-<blockquote>
+<h2 id="重要的几点"><a href="#重要的几点" class="headerlink" title="重要的几点"></a>重要的几点</h2><p>关键词”require”返回一个对象，该对象指向（引用）了给定文件的module.exports的值。如果开发者有意识或无意识地重新将module.exports赋予了不同的对象或者不同的数据结构，那么任何添加给原始module.exports对象的属性将无法被访问。</p>
 <p>举个例子有助于阐明这一点：</p>
-</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// greetings.js</span></span><br><span class="line"><span class="comment">// var exports = module.exports = &#123;&#125;;</span></span><br><span class="line"></span><br><span class="line">exports.sayHelloInEnglish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"HELLO"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.sayHelloInSpanish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hola"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> this line of code re-assigns module.exports */</span> </span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">"Bonjour"</span>;</span><br></pre></td></tr></table></figure>
 
-<p>Now let’s require greetings.js in main.js:</p>
-<blockquote>
 <p>现在让我们在main.js中<strong>require</strong> greetings.js</p>
-</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">var</span> greetings = <span class="built_in">require</span>(<span class="string">"./greetings.js"</span>);</span><br></pre></td></tr></table></figure>
 
-<p>At this moment, nothing is different than before. We assign the variable greetings to any code that is publicly available in greetings.js.</p>
+<p>这时，没有什么与之前不同。我们把greetings.js中的任何公开可用的代码赋值给变量greetings。（PS:我感觉这里翻译好像有点儿问题，但上面那段代码确实是在给变量greetings赋值，请参看如下原文）</p>
 <blockquote>
-<p>这时，没有什么与之前不同。</p>
+<p>原文：<br>At this moment, nothing is different than before. We assign the variable greetings to any code that is publicly available in greetings.js.</p>
 </blockquote>
+<p>重新赋值的结果是，当我们尝试调用<strong>sayHelloInEnglish</strong>和<strong>sayHelloInSpanish</strong>时，module.exports显示导出了一个默认值以外的数据结构：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">var</span> greetings = <span class="built_in">require</span>(<span class="string">"./greetings.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* TypeError: object Bonjour has no method 'sayHelloInEnglish' */</span></span><br><span class="line">greetings.sayHelloInEnglish();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* TypeError: object Bonjour has no method 'sayHelloInSpanish' */</span> </span><br><span class="line">greetings.sayHelloInSpanish();</span><br></pre></td></tr></table></figure>
+
+<p>为了理解为什么会发生这些错误，让我们将greetings的值打印到控制台：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Bonjour"</span></span><br><span class="line"><span class="built_in">console</span>.log(greetings);</span><br></pre></td></tr></table></figure>
+
+<p>在这一点上，我们尝试在字符串”Bonjour”上访问<strong>sayHelloInEnglish</strong>和<strong>sayHelloInSpanish</strong>方法。换句话说，module.exports不在指向<br>（引用）包含那些方法的默认对象。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在NodeJs中，导入导出模块是普遍存在的任务。我希望exports和module.exports的差异更清晰。此外，如果你将来在访问公开可用的方法时遇到错误，那<br>么我希望你可以更加理解为什么会发生那些错误。</p>
+<h1 id="译者扩展"><a href="#译者扩展" class="headerlink" title="译者扩展"></a>译者扩展</h1><h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h2><p>exports和module.exports初始化时，指向（引用）的都是同一个对象，但是require()方法最后返回的是module.exports，而不是exports，所以如果<br>把greetings中的代码修改为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// greetings.js</span></span><br><span class="line"><span class="comment">// var exports = module.exports = &#123;&#125;;</span></span><br><span class="line"></span><br><span class="line">exports.sayHelloInEnglish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"HELLO"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.sayHelloInSpanish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hola"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 去掉module</span></span><br><span class="line">exports = <span class="string">"Bonjour"</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p> 这样在main中执行就不会出错。</p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><ul>
+<li>exports 是在CommonJS 1 中定义的</li>
+<li>module.exports 是在CommonJS 2 中定义的</li>
+<li>CommonJS 2 兼容exports写法</li>
+<li>Node目前使用的是CommonJS 2的规范</li>
+</ul>
+<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p> 在Node中用module.exports代替exports</p>
 
                     
                     <!-- Tags Bottom -->
@@ -282,7 +262,7 @@
     <h3>Recent Posts</h3>
     
         <p>
-            <a href="/2019/08/27/Understanding-module-exports-and-exports-in-Node-js/">Understanding module.exports and exports in Node.j</a>
+            <a href="/2019/08/27/Understanding-module-exports-and-exports-in-Node-js/">理解Node中的module.exports和exports</a>
         </p>
     
 </div>
