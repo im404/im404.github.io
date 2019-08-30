@@ -199,7 +199,7 @@
 <p>由前面的两点原则可知，b.__proto__是指向其构造器B的prototype，所以输出true</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(b.__proto__ === B.prototype)                <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(b.__proto__ === a)                          <span class="comment">// true </span></span><br><span class="line"><span class="built_in">console</span>.log(a.__proto__ === A.prototype)                <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(A.__proto__ === <span class="built_in">Function</span>.prototype)         <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
-<p>这是什么？这是原型链。</p>
+<p>这是什么？这是原型链。函数的构造器是Function，所以A的__proto__指向的是Function的prototype。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(c.__proto__ === <span class="built_in">Function</span>.prototype)         <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(c.__proto__ === <span class="built_in">Object</span>.prototype)           <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <p>因为c是通过字面量形式创建的，所以他的默认构造器是Object（函数），所以它指向了Object.prototype</p>
