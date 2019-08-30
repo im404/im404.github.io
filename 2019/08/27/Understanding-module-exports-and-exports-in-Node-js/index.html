@@ -77,7 +77,7 @@
     
     <nav class="db dt-l w-100 mw8 center border-box pv3">
         <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/" title="Will">
-            <img src="/images/logo-white.png" class="dib h3" alt="Will">
+            <img src="/images/logo.png" class="dib h3" alt="Will">
         </a>
         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
             
@@ -195,9 +195,9 @@
 <p>为了理解为什么会发生这些错误，让我们将greetings的值打印到控制台：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Bonjour"</span></span><br><span class="line"><span class="built_in">console</span>.log(greetings);</span><br></pre></td></tr></table></figure>
 
-<p>在这一点上，我们尝试在字符串”Bonjour”上访问<strong>sayHelloInEnglish</strong>和<strong>sayHelloInSpanish</strong>方法。换句话说，module.exports不在指向<br>（引用）包含那些方法的默认对象。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在NodeJs中，导入导出模块是普遍存在的任务。我希望exports和module.exports的差异更清晰。此外，如果你将来在访问公开可用的方法时遇到错误，那<br>么我希望你可以更加理解为什么会发生那些错误。</p>
-<h1 id="译者扩展"><a href="#译者扩展" class="headerlink" title="译者扩展"></a>译者扩展</h1><h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h2><p>exports和module.exports初始化时，指向（引用）的都是同一个对象，但是require()方法最后返回的是module.exports，而不是exports，所以如果<br>把greetings中的代码修改为：</p>
+<p>在这一点上，我们尝试在字符串”Bonjour”上访问<strong>sayHelloInEnglish</strong>和<strong>sayHelloInSpanish</strong>方法。换句话说，module.exports不在指向（引用）包含那些方法的默认对象。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在NodeJs中，导入导出模块是普遍存在的任务。我希望exports和module.exports的差异更清晰。此外，如果你将来在访问公开可用的方法时遇到错误，那么我希望你可以更加理解为什么会发生那些错误。</p>
+<h1 id="译者扩展"><a href="#译者扩展" class="headerlink" title="译者扩展"></a>译者扩展</h1><h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h2><p>exports和module.exports初始化时，指向（引用）的都是同一个对象，但是require()方法最后返回的是module.exports，而不是exports，所以如果把greetings中的代码修改为：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// greetings.js</span></span><br><span class="line"><span class="comment">// var exports = module.exports = &#123;&#125;;</span></span><br><span class="line"></span><br><span class="line">exports.sayHelloInEnglish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"HELLO"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.sayHelloInSpanish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hola"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 去掉module</span></span><br><span class="line">exports = <span class="string">"Bonjour"</span>;</span><br></pre></td></tr></table></figure>
 
 
@@ -262,7 +262,7 @@
     <h3>Recent Posts</h3>
     
         <p>
-            <a href="/2019/08/29/Understanding-Javascript-Object/">Understanding-Javascript-Object</a>
+            <a href="/2019/08/29/Understanding-Javascript-Object/">理解ES5对象以及原型、原型链</a>
         </p>
     
         <p>
@@ -285,6 +285,18 @@
                     <div class="dib mh3">
                         <a class="f3 f2-ns white dim" href="https://github.com/im404" target="_blank">
                             <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="mailto:libra.2012@live.com" target="_blank">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="/#" target="_blank">
+                            <i class="fa fa-rss"></i>
                         </a>
                     </div>
                 

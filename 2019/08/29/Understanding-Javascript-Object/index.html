@@ -10,6 +10,8 @@
 
     <!--Description-->
     
+        <meta name="description" content="什么是对象这就是对象12345678910//字面量的方式创建对象，除此之外还有例如Object.create()、new Object()等方式可以创建对象var phone = &amp;#123;    brand: &#39;apple&#39;,    call: function(phoneNumber) &amp;#">
+    
 
     <!--Author-->
     
@@ -18,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Understanding-Javascript-Object">
+        <meta property="og:title" content="理解ES5对象以及原型、原型链">
     
 
     <!--Open Graph Description-->
@@ -40,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>Understanding-Javascript-Object - Will</title>
+    <title>理解ES5对象以及原型、原型链 - Will</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -74,7 +76,7 @@
     
     <nav class="db dt-l w-100 mw8 center border-box pv3">
         <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/" title="Will">
-            <img src="/images/logo-white.png" class="dib h3" alt="Will">
+            <img src="/images/logo.png" class="dib h3" alt="Will">
         </a>
         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
             
@@ -120,7 +122,7 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Understanding-Javascript-Object</h1>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">理解ES5对象以及原型、原型链</h1>
             <p class="f4 fw3 pab-100px tc tc-m tl-ns">2019-08-29</p>
         </div>
     </div>
@@ -141,7 +143,96 @@
                     
 
                     <!-- Main Post Content -->
-                    
+                    <img src="/2019/08/29/Understanding-Javascript-Object/cat1.jpg" title="post image">
+
+<h2 id="什么是对象"><a href="#什么是对象" class="headerlink" title="什么是对象"></a>什么是对象</h2><h3 id="这就是对象"><a href="#这就是对象" class="headerlink" title="这就是对象"></a>这就是对象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字面量的方式创建对象，除此之外还有例如Object.create()、new Object()等方式可以创建对象</span></span><br><span class="line"><span class="keyword">var</span> phone = &#123;</span><br><span class="line">    brand: <span class="string">'apple'</span>,</span><br><span class="line">    call: <span class="function"><span class="keyword">function</span>(<span class="params">phoneNumber</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// do call sb.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Phone = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> phone1 = <span class="keyword">new</span> Phone();</span><br></pre></td></tr></table></figure>
+
+<p>对象是一切事物的总称，例如手机，它是对象，它有brand属性，也拥有call的行为。</p>
+<p><strong>在JS中，除了原始类型外所有事物都是对象。</strong></p>
+<p>Object是对象，Function也是对象（对象内部有可以调用的标识）。JS的对象与C++、Java的对象不一样，JS对象是基于原型的，而C++、Java是基于类（对象的抽象）的。</p>
+<p><strong>所以JS也是面向对象的，但它是基于原型面向对象，而不是像其他OO语言一样基于类。</strong></p>
+<h3 id="JS对象假想模型"><a href="#JS对象假想模型" class="headerlink" title="JS对象假想模型"></a>JS对象假想模型</h3><p>JS的对象可以想象成是一个<strong>动态的Key-Value列表</strong>，每一行代表该对象的属性或者方法.</p>
+<p>为什么是动态的？因为JS的对象可以动态地添加删除其属性或者方法。</p>
+<p>把下面代码添加到上面代码的末尾：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#123; brand: 'apple', call: [Function: call] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(phone)</span><br><span class="line"></span><br><span class="line"><span class="comment">// add version property</span></span><br><span class="line">phone.version = <span class="string">"Xs Max"</span></span><br><span class="line"><span class="comment">//phone['version'] = "Xs Max"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123; brand: 'apple', call: [Function: call], version: 'Xs Max' &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(phone)</span><br><span class="line"></span><br><span class="line"><span class="comment">// delete version property</span></span><br><span class="line"><span class="keyword">delete</span> phone.version</span><br><span class="line"><span class="comment">// delete phone['version']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123; brand: 'apple', call: [Function: call] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(phone)</span><br></pre></td></tr></table></figure>
+
+<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><h3 id="英文释义："><a href="#英文释义：" class="headerlink" title="英文释义："></a>英文释义：</h3><blockquote>
+<p>A prototype is an early sample, model, or release of a product built to test a concept or process or to act as a thing to be replicated or learned from. It is a term used in a variety of contexts, including semantics, design, electronics, and software programming. A prototype is designed to test and trial a new design to enhance precision by system analysts and users. Prototyping serves to provide specifications for a real, working system rather than a theoretical one. In some workflow models, creating a prototype (a process sometimes called materialization) is the step between the formalization and the evaluation of an idea.The word prototype derives from the Greek πρωτότυπον prototypon, “primitive form”, neutral of πρωτότυπος prototypos, “original, primitive”, from πρῶτος protos, “first” and τύπος typos, “impression”.</p>
+</blockquote>
+<p>所以我个人对原型这个词的理解是，样板、demo、模板。</p>
+<h3 id="JAVASCRIPT中的Prototype"><a href="#JAVASCRIPT中的Prototype" class="headerlink" title="JAVASCRIPT中的Prototype"></a>JAVASCRIPT中的Prototype</h3><p><em>这段话有点儿绕，请注意区分</em></p>
+<blockquote>
+<ul>
+<li>每一个对象都拥有一个自己的原型（抽象概念）。</li>
+<li>每一个对象都拥有一个__proto__内部属性，但只有函数才有prototype公开属性。</li>
+<li>不同对象的原型（抽象概念）可能不同，但最终都是继承自Function函数。与其他OO语言不同，JS的Object函数也继承自Function</li>
+<li>所以**Function（函数）是JS中的一等公民</li>
+</ul>
+</blockquote>
+<h2 id="原型继承-原型链"><a href="#原型继承-原型链" class="headerlink" title="原型继承 - 原型链"></a>原型继承 - 原型链</h2><p>JS中的继承与其他OO语言不同，例如Java：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>JAVA的继承是类的继承，也可以说是实例对象的抽象的继承。比如一只叫Tom的猫（实例），我们把他抽象解释成猫（类），那么猫（类）又继承自动物（类）。这就是JAVA的继承。</p>
+<p>JS中的继承是原型的继承，也可以说是实例的继承。比如孙悟空（实例），它出生的时候只是一只猴子（其他语言中的类，JS不要），什么都不会。有一天他去跟菩提老祖（实例）学艺，菩提老祖把72变（函数）教（继承）给了孙悟空，这个时候悟空就可以使用菩提老祖的72变了。我们就可以把菩提老祖称之为孙悟空的原型、模板、样板，简单的讲就是我的原型会什么，我就会什么。</p>
+<p>上面是理解，但代码会有些不一样，来看代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A的构造器</span></span><br><span class="line"><span class="keyword">var</span> A = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.call = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'A call'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// B的构造器</span></span><br><span class="line"><span class="keyword">var</span> B = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line"></span><br><span class="line"><span class="comment">// B继承A</span></span><br><span class="line">B.prototype = a;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B();</span><br><span class="line"></span><br><span class="line"><span class="comment">// A call</span></span><br><span class="line">b.call()</span><br></pre></td></tr></table></figure>
+
+<p>这就是a会什么，b就会什么。</p>
+<p>为什么这里的B继承A是继承A的实例，写成这样行不行？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不行，这是错误的，下面讲为什么</span></span><br><span class="line">B.prototype = A;</span><br></pre></td></tr></table></figure>
+
+<p><strong>首先A是函数，也是构造器，它不是类，JS没有类的概念。</strong></p>
+<h3 id="继承是如何实现的"><a href="#继承是如何实现的" class="headerlink" title="继承是如何实现的"></a>继承是如何实现的</h3><p><strong>首先记住下面两点原则：</strong></p>
+<blockquote>
+<ul>
+<li>prototype 是函数(function) 的一个属性, 它指向函数的原型.</li>
+<li>__proto__ 是对象的内部属性, 它指向构造器的prototype, 对象依赖它进行原型链查询.</li>
+</ul>
+</blockquote>
+<p><strong>重点：只有函数的prototype属性才叫原型，对象的__proto__属性只是指向原型的一个指针。</strong></p>
+<p>把上面的代码改成这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A的构造器</span></span><br><span class="line"><span class="keyword">var</span> A = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.call = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'A call'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// B的构造器</span></span><br><span class="line"><span class="keyword">var</span> B = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.call = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'B call'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A()</span><br><span class="line"></span><br><span class="line"><span class="comment">// B继承A</span></span><br><span class="line">B.prototype = a;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = &#123;</span><br><span class="line">    call: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'C call'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 第一部分开始 */</span></span><br><span class="line"><span class="built_in">console</span>.log(b.__proto__ === B.prototype)                <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(b.__proto__ === a)                          <span class="comment">// true </span></span><br><span class="line"><span class="built_in">console</span>.log(a.__proto__ === A.prototype)                <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(A.__proto__ === <span class="built_in">Function</span>.prototype)         <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(c.__proto__ === <span class="built_in">Function</span>.prototype)         <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(c.__proto__ === <span class="built_in">Object</span>.prototype)           <span class="comment">// true</span></span><br><span class="line"><span class="comment">/* 第一部分结束 */</span></span><br><span class="line"><span class="built_in">console</span>.log()</span><br><span class="line"><span class="comment">/* 第二部分开始 */</span></span><br><span class="line"><span class="built_in">console</span>.log(A.__proto__ === <span class="built_in">Function</span>.prototype)         <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(A.__proto__ === <span class="built_in">Object</span>.prototype)           <span class="comment">// false</span></span><br><span class="line"><span class="comment">/* 第二部分结束 */</span></span><br><span class="line"><span class="built_in">console</span>.log()</span><br><span class="line"><span class="comment">/* 第三部分开始 */</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype)  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Object</span>.prototype)    <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype)    <span class="comment">// true</span></span><br><span class="line"><span class="comment">/* 第三部分结束 */</span></span><br></pre></td></tr></table></figure>
+
+<p>下面来解释一下代码最后三个部分的输出是为什么：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(b.__proto__ === B.prototype) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>由前面的两点原则可知，b.__proto__是指向其构造器B的prototype，所以输出true</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(b.__proto__ === B.prototype)                <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(b.__proto__ === a)                          <span class="comment">// true </span></span><br><span class="line"><span class="built_in">console</span>.log(a.__proto__ === A.prototype)                <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(A.__proto__ === <span class="built_in">Function</span>.prototype)         <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>这是什么？这是原型链。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(c.__proto__ === <span class="built_in">Function</span>.prototype)         <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(c.__proto__ === <span class="built_in">Object</span>.prototype)           <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>因为c是通过字面量形式创建的，所以他的默认构造器是Object（函数），所以它指向了Object.prototype</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(A.__proto__ === <span class="built_in">Function</span>.prototype)         <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(A.__proto__ === <span class="built_in">Object</span>.prototype)           <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>A是构造器（函数，也是对象），所以A.__proto__指向的是它的构造器Function（函数），即函数是由函数自己创建的，原因是函数也是对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype)  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Object</span>.prototype)    <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype)    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>第一个输出可以清晰的看出Function（函数）的内部属性__proto__指向的是自己的原型prototype<br>第二、三个输出可以看出Object的原型是Function</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ul>
+<li><p>原型继承是通过对象内部的__proto__和该对象构造器的prototype组合起来实现的。</p>
+</li>
+<li><p>在调用对象的方法或者查找其属性的时候，会先从对象自己内部开始找，如果找不到，则通过__proto__指针找到该对象构造器的原型prototype，再从原型的内部找，如果还是没有找到，则继续从__proto__找到其构造器的原型，以此类推。</p>
+<blockquote>
+<p>回过头来讲为什么下面这段代码在当前代码中是错的</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B.prototype = A;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>我们先按照那两个原则来分析：</p>
+<ol>
+<li>b需要调用call，但b没有call方法，则从b.__proto__找到构造器B的prototype；</li>
+<li>B的prototype是A（函数），则不存在call方法，继续通过A.__proto__查找call方法；</li>
+<li>A的__proto__指向的是构造器Function的prototype（大结局），也不存在call方法；</li>
+<li>所以b.call()会报错, b.call is not a function。</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><ul>
+<li>JS是基于原型面向对象的，本质上与其他OO语言不同，不需要代入其他OO语言思想来写JS代码，如果强行代入就无法更好的利用JS的优势了。</li>
+</ul>
+
                     
                     <!-- Tags Bottom -->
                     
@@ -178,7 +269,7 @@
     <h3>Recent Posts</h3>
     
         <p>
-            <a href="/2019/08/29/Understanding-Javascript-Object/">Understanding-Javascript-Object</a>
+            <a href="/2019/08/29/Understanding-Javascript-Object/">理解ES5对象以及原型、原型链</a>
         </p>
     
         <p>
@@ -201,6 +292,18 @@
                     <div class="dib mh3">
                         <a class="f3 f2-ns white dim" href="https://github.com/im404" target="_blank">
                             <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="mailto:libra.2012@live.com" target="_blank">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="/#" target="_blank">
+                            <i class="fa fa-rss"></i>
                         </a>
                     </div>
                 
