@@ -205,7 +205,7 @@
 <p>因为c是通过字面量形式创建的，所以他的默认构造器是Object（函数），所以它指向了Object.prototype</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(A.__proto__ === <span class="built_in">Function</span>.prototype)         <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(A.__proto__ === <span class="built_in">Object</span>.prototype)           <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
-<p>A是构造器（函数，也是对象），所以A.__proto__指向的是它的构造器Function（函数），即函数是由函数自己创建的，原因是函数也是对象。</p>
+<p>A是构造器（函数，也是对象），所以A.__proto__指向的是它的构造器Function（函数），即函数是Function创建的，原因是函数也是对象。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype)  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Object</span>.prototype)    <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype)    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <p>第一个输出可以清晰的看出Function（函数）的内部属性__proto__指向的是自己的原型prototype<br>第二、三个输出可以看出Object的原型是Function</p>
