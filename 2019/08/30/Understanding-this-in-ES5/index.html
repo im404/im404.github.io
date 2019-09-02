@@ -86,7 +86,7 @@ this是伴随函数存在的
     
     <nav class="db dt-l w-100 mw8 center border-box pv3">
         <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/" title="Will">
-            <img src="/images/logo.png" class="dib h3" alt="Will">
+            <img src="/images/logo-white.png" class="dib h3" alt="Will">
         </a>
         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
             
@@ -170,6 +170,14 @@ this是伴随函数存在的
 
 </li>
 </ul>
+<h2 id="apply-call-bind方法"><a href="#apply-call-bind方法" class="headerlink" title="apply, call, bind方法"></a>apply, call, bind方法</h2><blockquote>
+<p><strong>相同点</strong><br>这三个方法来自Function.prototype<br>这三个方法都是改变被调用方法的this指向</p>
+</blockquote>
+<blockquote>
+<p>**不同点<br>apply与call类似，但传入方法的参数不一样<br>apply与call一样都不会创建新的方法，<br>bind方法会创建一个方法，需要手动调用</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    count: <span class="number">10</span>,</span><br><span class="line">    getCount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> unbindMethod = obj.getCount;</span><br><span class="line"><span class="built_in">console</span>.log(unbindMethod === obj.getCount) <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bindMethod = unbindMethod.bind(obj)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(bindMethod === unbindMethod) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
 
                     
                     <!-- Tags Bottom -->
