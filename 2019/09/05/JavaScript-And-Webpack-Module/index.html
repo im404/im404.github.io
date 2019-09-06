@@ -55,14 +55,20 @@
   };
 </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript-And-Webpack-Module">
+  <meta name="description" content="模块在[模块编程]中，开发者将程序分解为许多功能块，称之为模块。每个模块都有表面上都小于一个完整程序，使验证、调试、测试不再那么重要。编码良好的模块提供了可靠的抽象以及封装的边界，因此每个模块在整个程序中具有一致的设计和明确的目的。Node.js几乎从它诞生之日起就支持了模块化编程。然后，在web端，对模块的支持却迟迟没有到来。在web方向上许多支持模块化JavaScript的工具都有其优势和局限">
+<meta name="keywords" content="翻译 Webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webpack-Module">
 <meta property="og:url" content="http://im404.github.io/2019/09/05/JavaScript-And-Webpack-Module/index.html">
 <meta property="og:site_name" content="Will">
+<meta property="og:description" content="模块在[模块编程]中，开发者将程序分解为许多功能块，称之为模块。每个模块都有表面上都小于一个完整程序，使验证、调试、测试不再那么重要。编码良好的模块提供了可靠的抽象以及封装的边界，因此每个模块在整个程序中具有一致的设计和明确的目的。Node.js几乎从它诞生之日起就支持了模块化编程。然后，在web端，对模块的支持却迟迟没有到来。在web方向上许多支持模块化JavaScript的工具都有其优势和局限">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-05T02:09:28.002Z">
+<meta property="og:image" content="http://im404.github.io/2019/09/05/JavaScript-And-Webpack-Module/...">
+<meta property="og:updated_time" content="2019-09-06T09:29:08.022Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript-And-Webpack-Module">
+<meta name="twitter:title" content="Webpack-Module">
+<meta name="twitter:description" content="模块在[模块编程]中，开发者将程序分解为许多功能块，称之为模块。每个模块都有表面上都小于一个完整程序，使验证、调试、测试不再那么重要。编码良好的模块提供了可靠的抽象以及封装的边界，因此每个模块在整个程序中具有一致的设计和明确的目的。Node.js几乎从它诞生之日起就支持了模块化编程。然后，在web端，对模块的支持却迟迟没有到来。在web方向上许多支持模块化JavaScript的工具都有其优势和局限">
+<meta name="twitter:image" content="http://im404.github.io/2019/09/05/JavaScript-And-Webpack-Module/...">
   <link rel="canonical" href="http://im404.github.io/2019/09/05/JavaScript-And-Webpack-Module/">
 
 
@@ -77,7 +83,7 @@
   };
 </script>
 
-  <title>JavaScript-And-Webpack-Module | Will</title>
+  <title>Webpack-Module | Will</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127635055-2"></script>
   <script>
@@ -236,7 +242,7 @@
       <meta itemprop="name" content="Will">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">JavaScript-And-Webpack-Module
+        <h1 class="post-title" itemprop="name headline">Webpack-Module
 
           
         </h1>
@@ -252,12 +258,33 @@
                 
               
 
-              <time title="创建时间：2019-09-05 10:09:27 / 修改时间：10:09:28" itemprop="dateCreated datePublished" datetime="2019-09-05T10:09:27+08:00">2019-09-05</time>
+              <time title="创建时间：2019-09-05 10:09:27" itemprop="dateCreated datePublished" datetime="2019-09-05T10:09:27+08:00">2019-09-05</time>
             </span>
           
             
 
             
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-06 17:29:08" itemprop="dateModified" datetime="2019-09-06T17:29:08+08:00">2019-09-06</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hello-Webpack/" itemprop="url" rel="index"><span itemprop="name">Hello Webpack</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -271,7 +298,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>在[模块编程]中，开发者将程序分解为许多功能块，称之为模块。</p><p>每个模块都有表面上都小于一个完整程序，使验证、调试、测试不再那么重要。编码良好的模块提供了可靠的抽象以及封装的边界，因此每个模块在整个程序中具有一致的设计和明确的目的。</p><p>Node.js几乎从它诞生之日起就支持了模块化编程。然后，在web端，对模块的支持却迟迟没有到来。在web方向上许多支持模块化JavaScript的工具都有其优势和局限。Webpack建立在从这些系统中学到的经验教训的基础上，并将模块的概念应用到了你项目的任何文件。</p><a id="more"></a>
+
+
+<h2 id="什么是Webpack-Module"><a href="#什么是Webpack-Module" class="headerlink" title="什么是Webpack Module"></a>什么是Webpack Module</h2><p>与Node.js的模块对比，webpack模块可以用多种方式来表达他们的依赖关系。看下面一些例子：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" target="_blank" rel="noopener">ES2015的import声明</a></li>
+<li><a href="http://www.commonjs.org/specs/modules/1.0/" target="_blank" rel="noopener">CommonJS</a>的require()声明</li>
+<li><a href="https://github.com/amdjs/amdjs-api/blob/master/AMD.md" target="_blank" rel="noopener">AMD</a>的define和require声明</li>
+<li>在css/sass/less文件中的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import" target="_blank" rel="noopener">@import声明</a></li>
+<li>在层叠样式表中的图片路径(url(…))或者html文件中的(<img src="...">)</li>
+</ul>
+<blockquote>
+<p>Webpack 1 需要引入指定的loader来转换ES2015 import，然而在webpack2中开箱即用。</p>
+</blockquote>
+<h2 id="支持的模块类型"><a href="#支持的模块类型" class="headerlink" title="支持的模块类型"></a>支持的模块类型</h2><p>webpack通过loaders支持使用多种语言和预处理器写的模块。加载器描述了webpack怎样处理非JavaScript的模块以及在你包中关联的这些依赖。webpack社区已经为多种受欢迎的语言、语言处理器构建了加载器，包括：</p>
+<ul>
+<li>CoffeeScript</li>
+<li>TypeScript</li>
+<li>ESNext (Babel)</li>
+<li>Sass</li>
+<li>Less</li>
+<li>Stylus</li>
+</ul>
+<p>还有许多其他的！总的来说，webpack提供了一个强大且丰富的Api用于自定义，这让开发者可以将webpack用于任何技术栈，同时不影响你的开发、测试、生产工作流程。</p>
+<p>有关完整列表，请参阅<a href="https://webpack.js.org/loaders" target="_blank" rel="noopener">加载器列表</a>或<a href="https://webpack.js.org/api/loaders" target="_blank" rel="noopener">自己写一个</a></p>
+
     </div>
 
     
@@ -281,6 +333,15 @@
       
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/翻译-Webpack/" rel="tag"># 翻译 Webpack</a>
+            
+          </div>
+        
 
         
 
@@ -344,6 +405,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块"><span class="nav-number">1.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Webpack-Module"><span class="nav-number">2.</span> <span class="nav-text">什么是Webpack Module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持的模块类型"><span class="nav-number">3.</span> <span class="nav-text">支持的模块类型</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -386,7 +449,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
