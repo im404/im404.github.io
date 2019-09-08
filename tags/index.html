@@ -265,7 +265,7 @@
             </div>
             <div class="tag-cloud-tags">
               
-                <a href="/tags/Node/" style="font-size: 12px; color: #ccc">Node</a> <a href="/tags/Webpack/" style="font-size: 12px; color: #ccc">Webpack</a> <a href="/tags/基础/" style="font-size: 30px; color: #111">基础</a> <a href="/tags/翻译/" style="font-size: 21px; color: #6f6f6f">翻译</a> <a href="/tags/翻译-Webpack/" style="font-size: 12px; color: #ccc">翻译 Webpack</a>
+                <a href="/tags/Node/" style="font-size: 12px; color: #ccc">Node</a> <a href="/tags/Webpack/" style="font-size: 21px; color: #6f6f6f">Webpack</a> <a href="/tags/基础/" style="font-size: 30px; color: #111">基础</a> <a href="/tags/翻译/" style="font-size: 30px; color: #111">翻译</a> <a href="/tags/翻译-Webpack/" style="font-size: 12px; color: #ccc">翻译 Webpack</a>
               
             </div>
           </div>
@@ -285,6 +285,9 @@
 
           </div>
           
+    
+    <div class="comments" id="gitalk-container"></div>
+  
 
         </div>
           
@@ -332,7 +335,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -471,6 +474,25 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'Iv1.70fcfc07f6b0fba5',
+      clientSecret: '3b3c8974793fd36a3f0624cacd299417aac72d9d',
+      repo: 'im404.github.io',
+      owner: 'im404',
+      admin: ['im404'],
+      id: 'f47af1d1eda4d807b02bba32be15120b',
+        language: 'zh-CN',
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
 </body>
 </html>
