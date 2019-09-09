@@ -55,18 +55,20 @@
   };
 </script>
 
-  <meta name="description" content="Entry Points">
+  <meta name="description" content="入口(Entry Points)Hello Webpack中提到，在Webpack配置文件中有许多种方法来定义entry属性。我们将向你展示你能怎样配置entry属性，此外还将向你解释这样配置是为什么。单个入口语法（简写）用法：entry: string|Arraywebpack.config.js123module.exports = &amp;#123;  entry: &apos;./path/to/my/e">
 <meta name="keywords" content="翻译,Webpack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Webpack-Entry-Points">
+<meta property="og:title" content="Webpack入口">
 <meta property="og:url" content="http://im404.github.io/2019/09/07/Webpack-Entry-Points/index.html">
 <meta property="og:site_name" content="Will">
-<meta property="og:description" content="Entry Points">
+<meta property="og:description" content="入口(Entry Points)Hello Webpack中提到，在Webpack配置文件中有许多种方法来定义entry属性。我们将向你展示你能怎样配置entry属性，此外还将向你解释这样配置是为什么。单个入口语法（简写）用法：entry: string|Arraywebpack.config.js123module.exports = &amp;#123;  entry: &apos;./path/to/my/e">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-08T14:43:35.793Z">
+<meta property="og:image" content="http://im404.github.io/2019/09/07/Webpack-Entry-Points/webpack-entry-1.jpg">
+<meta property="og:updated_time" content="2019-09-09T02:56:07.304Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Webpack-Entry-Points">
-<meta name="twitter:description" content="Entry Points">
+<meta name="twitter:title" content="Webpack入口">
+<meta name="twitter:description" content="入口(Entry Points)Hello Webpack中提到，在Webpack配置文件中有许多种方法来定义entry属性。我们将向你展示你能怎样配置entry属性，此外还将向你解释这样配置是为什么。单个入口语法（简写）用法：entry: string|Arraywebpack.config.js123module.exports = &amp;#123;  entry: &apos;./path/to/my/e">
+<meta name="twitter:image" content="http://im404.github.io/2019/09/07/Webpack-Entry-Points/webpack-entry-1.jpg">
   <link rel="canonical" href="http://im404.github.io/2019/09/07/Webpack-Entry-Points/">
 
 
@@ -81,7 +83,7 @@
   };
 </script>
 
-  <title>Webpack-Entry-Points | Will</title>
+  <title>Webpack入口 | Will</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127635055-2"></script>
   <script>
@@ -240,7 +242,7 @@
       <meta itemprop="name" content="Will">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Webpack-Entry-Points
+        <h1 class="post-title" itemprop="name headline">Webpack入口
 
           
         </h1>
@@ -267,7 +269,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-08 22:43:35" itemprop="dateModified" datetime="2019-09-08T22:43:35+08:00">2019-09-08</time>
+                <time title="修改时间：2019-09-09 10:56:07" itemprop="dateModified" datetime="2019-09-09T10:56:07+08:00">2019-09-09</time>
               </span>
             
           
@@ -283,7 +285,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Entry-Points"><a href="#Entry-Points" class="headerlink" title="Entry Points"></a>Entry Points</h2>
+        <img src="/2019/09/07/Webpack-Entry-Points/webpack-entry-1.jpg" title="post image"><h2 id="入口-Entry-Points"><a href="#入口-Entry-Points" class="headerlink" title="入口(Entry Points)"></a>入口(Entry Points)</h2><p><a href="/2019/09/05/Hello-Webpack">Hello Webpack</a>中提到，在Webpack配置文件中有许多种方法来定义entry属性。我们将向你展示你能怎样配置entry属性，此外还将向你解释这样配置是为什么。</p><h2 id="单个入口语法（简写）"><a href="#单个入口语法（简写）" class="headerlink" title="单个入口语法（简写）"></a>单个入口语法（简写）</h2><p>用法：entry: string|Array<string></string></p><p>webpack.config.js</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: <span class="string">'./path/to/my/entry/file.js'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+
+
+
+<p>entry属性单入口语法是下面这种写法的简写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    main: <span class="string">'./path/to/my/entry/file.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当你向entry传入一个数组会发生什么？向entry属性传入一个文件路径数组会创建所谓的”多主入口(multi-main entry)”。当你想同时注入多个依赖文件，并将他们的把他们的依赖关系图创建到一个”块”时，非常有用。</p>
+</blockquote>
+<h2 id="对象语法"><a href="#对象语法" class="headerlink" title="对象语法"></a>对象语法</h2><p>用法：entry: {[entryChunkName: string]: string|Array<string>}</string></p>
+<p>webpack.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">'./src/app.js'</span>,</span><br><span class="line">    adminApp: <span class="string">'./src/adminApp.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>对象语法更详细。然而，这是在你的应用中定义单个或者多个入口的最具扩展性的方法。</p>
+<blockquote>
+<p>“可扩展的Webpack配置”是能够被重用并与其他部分配置文件合并的配置。这是一种流行的技术，常常被用于通过环境、构建目标、运行时等进行关注点分离。然后用像<a href="https://github.com/survivejs/webpack-merge" target="_blank" rel="noopener">webpack-merge</a>等工具来合并。</p>
+</blockquote>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>下面是一个入口配置列表和他们在真实场景的用例：</p>
+<h3 id="分离App和第三方库-vendor-入口"><a href="#分离App和第三方库-vendor-入口" class="headerlink" title="分离App和第三方库(vendor)入口"></a>分离App和第三方库(vendor)入口</h3><blockquote>
+<p>在Webpack 4之前通常是将第三方库作为单独的入口编译进一个单独文件（结合<strong>CommonsChunkPlugin</strong>）。</p>
+<p>在Webpack 4中不鼓励这么做。相反，<strong>optimization.splitChunks</strong>选项负责分离第三方库和应用程序模块并创建单独的文件。不要为第三方库或者非执行起点的东西创建入口。</p>
+</blockquote>
+<h3 id="多页应用程序"><a href="#多页应用程序" class="headerlink" title="多页应用程序"></a>多页应用程序</h3><p>webpack.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    pageOne: <span class="string">'./src/pageOne/index.js'</span>,</span><br><span class="line">    pageTwo: <span class="string">'./src/pageTwo/index.js'</span>,</span><br><span class="line">    pageThree: <span class="string">'./src/pageThree/index.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>这么做发生了什么？</strong>我们是在告诉webpack我们想要三个独立的依赖关系图（像上面的例子）。</p>
+<p><strong>为什么？</strong> 在多页应用程序中，服务器会为你获取一个新的html文档。页面重新加载一个新的文档，并重新下载资源。然而，这个了我们做许多事的唯一的机会：</p>
+<ul>
+<li>用<strong>optimization.splitChunks</strong>来创建在多页面之间共享应用程序代码的包。随着入口点的增加，在多个入口点之间重用大量的代码/模块的多页应用程序能从这些技术当中获得更多好处。</li>
+</ul>
+<blockquote>
+<p>根据经验：一个HTML文档只用一个入口。</p>
+</blockquote>
+
     </div>
 
     
@@ -310,8 +349,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/05/JavaScript-And-Webpack-Module/" rel="next" title="Webpack Module">
-                  <i class="fa fa-chevron-left"></i> Webpack Module
+                <a href="/2019/09/05/JavaScript-And-Webpack-Module/" rel="next" title="Webpack模块">
+                  <i class="fa fa-chevron-left"></i> Webpack模块
                 </a>
               
             </div>
@@ -370,7 +409,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Entry-Points"><span class="nav-number">1.</span> <span class="nav-text">Entry Points</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#入口-Entry-Points"><span class="nav-number">1.</span> <span class="nav-text">入口(Entry Points)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单个入口语法（简写）"><span class="nav-number">2.</span> <span class="nav-text">单个入口语法（简写）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象语法"><span class="nav-number">3.</span> <span class="nav-text">对象语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案"><span class="nav-number">4.</span> <span class="nav-text">方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分离App和第三方库-vendor-入口"><span class="nav-number">4.1.</span> <span class="nav-text">分离App和第三方库(vendor)入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多页应用程序"><span class="nav-number">4.2.</span> <span class="nav-text">多页应用程序</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
